@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cent7-device
+spec:
+  containers:
+    - name: cent7-device
+      image: centos7:test
+      command:
+        - tail
+        - -f
+        - /dev/null
+      volumeMounts:
+        - mountPath: /dev/snd
+          name: dev-snd
+      securityContext:
+        privileged: true
+  volumes:
+  - name: dev-snd
+    hostPath:
+      path: /dev/snd

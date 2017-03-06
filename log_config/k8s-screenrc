@@ -1,0 +1,24 @@
+sessionname k8sdebug
+hardstatus alwayslastline '%{= .} %-Lw%{= .}%> %n%f %t*%{= .}%+Lw%< %-=%{g}(%{d}%H/%l%{g})'
+setenv PROMPT_COMMAND /bin/true
+screen -t shell bash
+screen -t kube-apiserver bash
+stuff "sudo tail -f /tmp/kube-apiserver.log"
+logfile /tmp/kube-apiserver.log
+log on
+screen -t kubelet bash
+stuff "sudo tail -f /tmp/kubelet.log"
+logfile /tmp/kubelet.log
+log on
+screen -t kube-controller-manage bash
+stuff "sudo tail -f /tmp/kube-controller-manager.log"
+logfile /tmp/kube-controller-manager.log
+log on
+screen -t kube-proxy bash
+stuff "sudo tail -f /tmp/kube-proxy.log"
+logfile /tmp/kube-proxy.log
+log on
+screen -t kube-scheduler bash
+stuff "sudo tail -f /tmp/kube-scheduler.log"
+logfile /tmp/kube-scheduler.log
+log on

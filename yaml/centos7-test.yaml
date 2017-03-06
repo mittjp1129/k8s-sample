@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: centos7-test
+spec:
+  containers:
+    - name: centos7-container
+      image: centos7:test
+      command:
+        - tail
+        - -f
+        - /dev/null

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cent7-hostpath
+spec:
+  containers:
+    - name: cent7-hostpath
+      image: centos7:test
+      command:
+        - tail
+        - -f
+        - /dev/null
+      volumeMounts:
+      - mountPath: /test-pd
+        name: test-volume
+  volumes:
+  - name: test-volume
+    hostPath:
+      path: /data
