@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+ name: ebs-pv1
+spec:
+ capacity:
+   storage: 2Gi
+ accessModes:
+   - ReadWriteOnce
+ awsElasticBlockStore:
+   volumeID: vol-079033653d3945a51
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: ebs-claim1
+spec:
+ accessModes:
+  - ReadWriteOnce
+ resources:
+   requests:
+     storage: 1Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ebs-pod1
+spec:
+  containers:
+  - name: ebs-pod1
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - mountPath: /usr/share/busybox/mymount
+      name: ebsvol
+  volumes:
+    - name: ebsvol
+      persistentVolumeClaim:
+        claimName: ebs-claim1
+

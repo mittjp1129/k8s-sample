@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fcvol
+spec:
+  containers:
+  - name: fcvol
+    image: kubernetes/pause
+    volumeMounts:
+    - mountPath: "/mnt/fcpd"
+      name: fcvol
+  volumes:
+  - name: fcvol
+    fc:
+      targetWWNs: ["50060e801049cfd1"]
+      lun: 0
+      fsType: ext4
+      readOnly: true

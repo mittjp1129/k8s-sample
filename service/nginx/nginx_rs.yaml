@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ReplicationController # kindをReplicationControllerに
+metadata:
+  name: nginx-rc-1
+spec:
+  replicas: 2  # レプリカ数の定義
+  selector:    # どのPodを監視対象にするかの設定
+    app: petshop  # labelにpetshop があるやつ
+  template:
+    metadata:
+      labels:  # labelにペットショップを設定
+        app: petshop
+    spec:
+      containers:
+      - name: nginx-1-1
+        image: nginx:latest
+        ports:
+        - containerPort: 80

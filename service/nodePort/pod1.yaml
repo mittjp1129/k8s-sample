@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-app1
+  labels:
+    run: test
+spec:
+  containers:
+  - name: test-app1
+    image: nginx:latest
+    ports:
+    - containerPort: 80

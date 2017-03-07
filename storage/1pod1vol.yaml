@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: file-pv001
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "slow"
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain
+  fc:
+    targetWWNs: ["50060e801049cfd1"]
+    lun: 0
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: file-pvc001
+  annotations:
+    volume.beta.kubernetes.io/storage-class: slow
+spec:
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: centos-pod
+spec:
+  containers:
+    - name: centos1
+      image: centos:latest
+      command:
+        - tail
+        - -f
+        - /dev/null
+      volumeMounts:
+        - name: data
+          mountPath: /mnt
+    - name: centos2
+      image: centos:latest
+      command:
+        - tail
+        - -f
+        - /dev/null
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: file-pvc001
+        readOnly: true
