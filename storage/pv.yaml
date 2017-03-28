@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Recycle
   nfs:
     path: /public/01
-    server: k8s-master
+    server: k8sbuild-master
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -28,7 +28,7 @@ spec:
   persistentVolumeReclaimPolicy: Recycle
   nfs:
     path: /public/02
-    server: k8s-master
+    server: k8sbuild-master
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -44,4 +44,4 @@ spec:
   persistentVolumeReclaimPolicy: Recycle
   nfs:
     path: /public/03
-    server: k8s-master
+    server: k8sbuild-master
