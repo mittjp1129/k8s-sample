@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: nginx-pvc01
   annotations:
-    volume.beta.kubernetes.io/storage-class: "standard"
+    volume.beta.kubernetes.io/storage-class: default
 spec:
   accessModes:
     - ReadWriteMany

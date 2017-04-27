@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: centos
+  name: centos-svc
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: web-http
+      protocol: TCP
+  selector: 
+    name: centos
+  type: LoadBalancer
+  loadBalancerIP: xx.xx.xx.xx
