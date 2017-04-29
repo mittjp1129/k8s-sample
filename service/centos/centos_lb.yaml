@@ -8,9 +8,8 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: web-http
+      targetPort: 31067
       protocol: TCP
   selector: 
-    name: centos
+    app: centos
   type: LoadBalancer
-  loadBalancerIP: xx.xx.xx.xx
