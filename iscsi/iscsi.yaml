@@ -13,9 +13,9 @@ spec:
   volumes:
   - name: iscsipd-rw
     iscsi:
-      targetPortal: 10.0.2.15:3260
-      portals: ['10.0.2.16:3260', '10.0.2.17:3260']
-      iqn: iqn.2001-04.com.example:storage.kube.sys1.xyz
+      targetPortal: 192.168.122.34:3260
+      portals: ['192.168.122.34:3260', '192.168.122.244:3260']
+      iqn: iqn.2017-05.com.example:k8sbuild
       lun: 0
       fsType: ext4
       readOnly: true
