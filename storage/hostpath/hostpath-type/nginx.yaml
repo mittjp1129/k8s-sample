@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+      - containerPort: 80
+      volumeMounts:
+        - name: data
+          mountPath: /dev/loop2
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: nginx-pvc01
