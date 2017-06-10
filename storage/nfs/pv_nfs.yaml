@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Recycle
   nfs:
     path: /public/01
-    server: k8sbuild-master
+    server: fc25
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -28,20 +28,4 @@ spec:
   persistentVolumeReclaimPolicy: Recycle
   nfs:
     path: /public/02
-    server: k8sbuild-master
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: dbpv03
-  annotations:
-    volume.beta.kubernetes.io/storage-class: "slow"
-spec:
-  capacity:
-    storage: 10Mi
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Recycle
-  nfs:
-    path: /public/03
-    server: k8sbuild-master
+    server: fc25

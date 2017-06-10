@@ -13,9 +13,9 @@ spec:
   volumes:
   - name: iscsipd-rw
     iscsi:
-      targetPortal: 192.168.122.85:3260
-      portals: ['192.168.122.85:3260', '192.168.122.7:3260']
-      iqn: iqn.2017-05.com.example:rhel7
+      targetPortal: 192.168.122.231:3260
+      portals: ['192.168.122.228:3260']
+      iqn: iqn.2017-05.com.example:fc25
       lun: 0
       fsType: ext4
       readOnly: true
