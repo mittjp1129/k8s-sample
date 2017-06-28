@@ -9,6 +9,7 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
+  volumeType: block
   persistentVolumeReclaimPolicy: Recycle
   iscsi:
     targetPortal: 192.168.122.85:3260
