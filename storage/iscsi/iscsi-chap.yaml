@@ -13,12 +13,12 @@ spec:
   volumes:
   - name: iscsivol
     iscsi:
-      targetPortal: 192.168.122.69:3260
-      iqn: iqn.2017-05.k8s.srv:storage.target01
+      targetPortal: 192.168.122.85:3260
+      iqn: iqn.2017-05.com.example:rhel7
       lun: 0
       fsType: ext4
       readOnly: true
-      chapAuthDiscovery: true
+      chapAuthDiscovery: false
       chapAuthSession: true
       secretRef: 
          name: chap-secret
