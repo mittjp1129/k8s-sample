@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: block-pvc001
+  name: nginx-pvc02
   annotations:
     volume.beta.kubernetes.io/storage-class: slow
 spec:

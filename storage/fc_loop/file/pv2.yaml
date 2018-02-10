@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: block-pv001
+  name: pv0002
   annotations:
     volume.beta.kubernetes.io/storage-class: "slow"
 spec:
@@ -9,9 +9,8 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  volumeMode: Block
   persistentVolumeReclaimPolicy: Retain
   fc:
-    targetWWNs: ["50060e801049cfd1"]
-    lun: 0
+    wwids: ["3600508b400105e210000900000490000"]
+    fsType: ext4
     readOnly: true

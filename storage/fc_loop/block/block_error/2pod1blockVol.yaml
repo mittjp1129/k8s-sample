@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: block-pv001
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "slow"
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Block
+  persistentVolumeReclaimPolicy: Retain
+  fc:
+    targetWWNs: ["50060e801049cfd1"]
+    lun: 0
+    readOnly: true
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: block-pvc001
+  annotations:
+    volume.beta.kubernetes.io/storage-class: slow
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Block
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-block001
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:latest
+      ports:
+      - containerPort: 80
+      volumeDevices:
+        - name: data
+          devicePath: /dev/xvda
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: block-pvc001
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-block002
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:latest
+      ports:
+      - containerPort: 80
+      volumeDevices:
+        - name: data
+          devicePath: /dev/xvdz
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: block-pvc001

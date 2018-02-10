@@ -8,10 +8,10 @@ spec:
       image: nginx
       ports:
       - containerPort: 80
-      volumeMounts:
+      volumeDevices:
         - name: data
-          mountPath: /usr/share/nginx/html
+          devicePath: /dev/xvda
   volumes:
     - name: data
       persistentVolumeClaim:
-        claimName: nginx-pvc02
+        claimName: block-pvc001

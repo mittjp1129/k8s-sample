@@ -11,6 +11,7 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   fc:
-    wwids: ["3600508b400105e210000900000490000"]
+    targetWWNs: ["50060e801049cfd1"]
+    lun: 1
     fsType: ext4
     readOnly: true

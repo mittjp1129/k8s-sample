@@ -1,0 +1,54 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: ceph-pv
+  annotations:
+    volume.beta.kubernetes.io/storage-class: slow
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Block
+  persistentVolumeReclaimPolicy: Retain
+  rbd:
+    monitors:
+      - 192.168.122.242
+    pool: kubernetes 
+    image: raw-volume
+    user: admin
+    secretRef:
+      name: ceph-secret-admin 
+    readOnly: false
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: ceph-claim
+  annotations:
+    volume.beta.kubernetes.io/storage-class: slow
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Block
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:latest
+      ports:
+      - containerPort: 80
+      volumeDevices:
+        - name: data
+          devicePath: /dev/xvda
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: ceph-claim
