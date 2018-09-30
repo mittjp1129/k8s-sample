@@ -1,0 +1,28 @@
+# 制限したポリシー
+apiVersion: extensions/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: restricted
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
+spec:
+  privileged: false  # privileged は利用させない
+  allowPrivilegeEscalation: false # 特権昇格は利用させない
+  allowedCapabilities:
+  - '*'
+  volumes:
+  - '*'
+  hostNetwork: false # ホストのネットワークは利用させない
+  hostPorts:
+  - min: 0
+    max: 65535
+  hostIPC: true # ホスト IPC は利用させない
+  hostPID: true # ホスト PID は利用させない
+  runAsUser:
+    rule: 'MustRunAsNonRoot' # コンテナは root で実行させない
+  seLinux:
+    rule: 'RunAsAny'
+  supplementalGroups:
+    rule: 'RunAsAny'
+  fsGroup:
+    rule: 'RunAsAny'

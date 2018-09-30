@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: iscsipd-4
+spec:
+  containers:
+  - name: iscsipd-rw4
+    image: kubernetes/pause
+    volumeMounts:
+    - mountPath: "/mnt/iscsipd"
+      name: iscsipd-rw4
+  volumes:
+  - name: iscsipd-rw4
+    iscsi:
+      targetPortal: 192.168.122.215:3260
+      ISCSIInterface: ens9
+      iqn: iqn.2017-05.com.example:fc25
+      lun: 0
+      fsType: ext4
+      readOnly: true
